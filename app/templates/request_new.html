@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Submit Request</h1>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div class="field">{{ form.type.label }} {{ form.type() }}</div>
+  <div class="field">{{ form.start_date.label }} {{ form.start_date() }}</div>
+  <div class="field">{{ form.end_date.label }} {{ form.end_date() }}</div>
+  <div class="field">{{ form.days.label }} {{ form.days() }}</div>
+  <div class="field">{{ form.reason.label }} {{ form.reason(rows=3) }}</div>
+  <div class="actions">{{ form.submit() }}</div>
+</form>
+{% endblock %}

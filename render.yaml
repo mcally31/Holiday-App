@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: holiday-sickness-tracker
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT 'app:create_app()'
+    envVars:
+      - key: SECRET_KEY
+        value: change-this-secret
+      - key: FLASK_ENV
+        value: production

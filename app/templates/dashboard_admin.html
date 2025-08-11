@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<section class="panel">
+  <h2>Users</h2>
+  <table>
+    <tr><th>Name</th><th>Email</th><th>Role</th><th>Allowance</th><th>Taken</th><th></th></tr>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.name }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.role.name }}</td>
+      <td>{{ u.allowance_days }}</td>
+      <td>{{ u.days_taken }}</td>
+      <td><a href="{{ url_for('main.users_edit', user_id=u.id) }}">Edit</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="panel">
+  <h2>Pending Requests</h2>
+  <table>
+    <tr><th>Employee</th><th>Type</th><th>Dates</th><th>Days</th><th>Reason</th></tr>
+    {% for r in pending %}
+    <tr>
+      <td>{{ r.user.name }}</td>
+      <td>{{ r.type }}</td>
+      <td>{{ r.start_date }} → {{ r.end_date }}</td>
+      <td>{{ r.days }}</td>
+      <td>{{ r.reason }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Manager Dashboard</h1>
+<section class="panel">
+  <h2>Pending Requests</h2>
+  <table>
+    <tr><th>Employee</th><th>Type</th><th>Dates</th><th>Days</th><th>Reason</th><th>Actions</th></tr>
+    {% for r in pending %}
+    <tr>
+      <td>{{ r.user.name }}</td>
+      <td>{{ r.type }}</td>
+      <td>{{ r.start_date }} → {{ r.end_date }}</td>
+      <td>{{ r.days }}</td>
+      <td>{{ r.reason }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('main.approve_request', req_id=r.id) }}" style="display:inline">
+          <input type="text" name="manager_comment" placeholder="comment (optional)" />
+          <button type="submit">Approve</button>
+        </form>
+        <form method="POST" action="{{ url_for('main.decline_request', req_id=r.id) }}" style="display:inline">
+          <input type="text" name="manager_comment" placeholder="comment (optional)" />
+          <button type="submit">Decline</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

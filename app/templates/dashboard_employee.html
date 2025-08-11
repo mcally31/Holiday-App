@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>My Requests</h1>
+<p>Allowance: {{ current_user.days_taken }} / {{ current_user.allowance_days }} days used</p>
+<p><a href="{{ url_for('main.request_new') }}">Submit new request</a></p>
+<table>
+  <tr><th>Type</th><th>Dates</th><th>Days</th><th>Status</th><th>Manager Comment</th></tr>
+  {% for r in my_reqs %}
+  <tr>
+    <td>{{ r.type }}</td>
+    <td>{{ r.start_date }} → {{ r.end_date }}</td>
+    <td>{{ r.days }}</td>
+    <td>{{ r.status }}</td>
+    <td>{{ r.manager_comment }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
